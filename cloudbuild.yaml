@@ -1,15 +1,15 @@
   steps:
   # Build the Docker image using the Docker Cloud Builder.
   - name: 'gcr.io/cloud-builders/docker'
-    # args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:$COMMIT_SHA', '.']
-    args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:latest', '-t', 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:$COMMIT_SHA', '.']
+    # args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:latest', '-t', 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:$COMMIT_SHA', '.']
     dir: 'flask-app'
 
   # Push the image to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:latest']
+    args: ['push', 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:latest']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:$COMMIT_SHA']
+    args: ['push', 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:$COMMIT_SHA']
 
   # Deploy the container to Google Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -19,7 +19,7 @@
       - 'deploy'
       - 'flask-img'
       - '--image'
-      - 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:latest'
+      - 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:latest'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -31,5 +31,5 @@ options:
   logging: CLOUD_LOGGING_ONLY 
 
 images:
-  - 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:latest'
-  - 'northamerica-northeast1-docker.pkg.dev/ci-lab-412213/flask-app/flask-img:$COMMIT_SHA'
+  - 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:latest'
+  - 'northamerica-northeast1-docker.pkg.dev/omega-baton-401802/flask-app/flask-img:$COMMIT_SHA'
